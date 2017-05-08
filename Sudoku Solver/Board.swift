@@ -47,12 +47,59 @@ class Board {
     
     /// ## Solver Method
     /// Public Solve Method: Solves a Board
-    /// - Parameter row: row location
-    /// - Parameter col: column location
-    /// - Parameter board: given board
     /// - Returns: Bool
     func solve() -> Bool {
-        return solve_cell(0, col: 0, board: self.board)
+        if solvable() {
+            
+            return solve_cell(0, col: 0, board: self.board)
+            
+        } else {
+            
+            print("Not solvable")
+            return false
+        }
+        
+    }
+    
+    
+    /// Checks a board to see if a valid solvable input board
+    /// - Returns: Bool
+    func solvable() -> Bool {
+        
+        var rows : [[Int]] = Array(count: size, repeatedValue: Array(count: size, repeatedValue: 0))
+        var cols : [[Int]] = Array(count: size, repeatedValue: Array(count: size, repeatedValue: 0))
+        var sqrs : [[[Int]]] = Array(count: size/3, repeatedValue: Array(count: size/3, repeatedValue: Array(count: size, repeatedValue: 0)))
+        
+        for (r, row) in board.enumerate() {
+            for (c, cell) in row.enumerate() {
+                let number = cell - 1
+                
+                if cell > 0 {
+                    
+                    if rows[r][number] > 0 {
+                        
+                        return false
+                    }
+                    
+                    if cols[c][number] > 0 {
+                        
+                        return false
+                    }
+                    
+                    if sqrs[r/3][c/3][number] > 0 {
+                        
+                        return false
+                    }
+                    
+                    rows[r][number] += 1
+                    cols[c][number] += 1
+                    sqrs[r/3][c/3][number] += 1
+                    
+                }
+            }
+        }
+        
+        return true
     }
     
     /// Solves for a single cell
