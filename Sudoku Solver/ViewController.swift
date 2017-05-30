@@ -46,17 +46,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - UICollectionViewDataSource protocol
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         collectionView.addBackground("Sudoku.png")
         return 9
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 9
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
         //FIXME
         let width = collectionView.bounds.size.width
@@ -65,13 +65,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SudokuCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SudokuCollectionViewCell
         
         
         cell.myLabel.text = self.items[indexPath.item]
-        cell.myLabel.backgroundColor = UIColor.whiteColor()
+        cell.myLabel.backgroundColor = UIColor.white
         
         
         return cell
@@ -80,7 +80,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // MARK: - UICollectionViewDelegate protocol
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You selected cell at [\(indexPath.section), \(indexPath.item)]")
         
     }
@@ -92,16 +92,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 extension UIView {
     
-    func addBackground(imageName : NSString) {
+    func addBackground(_ imageName : NSString) {
         
         let width = self.bounds.size.width
         let height = self.bounds.size.height
         
-        let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
+        let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         imageViewBackground.image = UIImage(named: imageName as String)
-        imageViewBackground.contentMode = UIViewContentMode.ScaleAspectFill
+        imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
         
         self.addSubview(imageViewBackground)
-        self.sendSubviewToBack(imageViewBackground)
+        self.sendSubview(toBack: imageViewBackground)
     }}
 

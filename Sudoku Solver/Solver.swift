@@ -11,14 +11,15 @@ import Foundation
 
 class Solver : NSObject {
     
-    class func solve(var board:[[Int]]) -> Bool {
+    class func solve(_ board:[[Int]]) -> Bool {
+        var board = board
         
         if !checkBoard(board) {
             return false
         }
         
-        for (i, row) in board.enumerate() {
-            for (j, num) in row.enumerate() {
+        for (i, row) in board.enumerated() {
+            for (j, num) in row.enumerated() {
                 
                 // empty cell
                 if num == 0 {
@@ -55,7 +56,7 @@ class Solver : NSObject {
     }
     
     
-    class func isValidCell(board:[[Int]], col: Int, row: Int, cell:Int) -> Bool {
+    class func isValidCell(_ board:[[Int]], col: Int, row: Int, cell:Int) -> Bool {
         
         for i in 0..<9 {
             
@@ -76,7 +77,7 @@ class Solver : NSObject {
         return true
     }
     
-    class func checkBoard(board:[[Int]]) -> Bool {
+    class func checkBoard(_ board:[[Int]]) -> Bool {
         
         //TODO assert size
         //TODO assert null

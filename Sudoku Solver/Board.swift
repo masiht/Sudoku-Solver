@@ -66,12 +66,12 @@ class Board {
     /// - Returns: Bool
     func solvable() -> Bool {
         
-        var rows : [[Int]] = Array(count: size, repeatedValue: Array(count: size, repeatedValue: 0))
-        var cols : [[Int]] = Array(count: size, repeatedValue: Array(count: size, repeatedValue: 0))
-        var sqrs : [[[Int]]] = Array(count: size/3, repeatedValue: Array(count: size/3, repeatedValue: Array(count: size, repeatedValue: 0)))
+        var rows : [[Int]] = Array(repeating: Array(repeating: 0, count: size), count: size)
+        var cols : [[Int]] = Array(repeating: Array(repeating: 0, count: size), count: size)
+        var sqrs : [[[Int]]] = Array(repeating: Array(repeating: Array(repeating: 0, count: size), count: size/3), count: size/3)
         
-        for (r, row) in board.enumerate() {
-            for (c, cell) in row.enumerate() {
+        for (r, row) in board.enumerated() {
+            for (c, cell) in row.enumerated() {
                 let number = cell - 1
                 
                 if cell > 0 {
@@ -107,7 +107,7 @@ class Board {
     /// - Parameter col: column location
     /// - Parameter board: given board
     /// - Returns: Bool
-    private func solve_cell(row: Int, col: Int, board: [[Int]]) -> Bool {
+    fileprivate func solve_cell(_ row: Int, col: Int, board: [[Int]]) -> Bool {
         
         var row = row
         var col = col
@@ -150,7 +150,7 @@ class Board {
     /// - Parameter board: given board
     /// - Parameter newCell: suggested value
     /// - Returns: Bool
-    private func isValidSolution(row: Int, col: Int, board: [[Int]], newCell: Int) -> Bool {
+    fileprivate func isValidSolution(_ row: Int, col: Int, board: [[Int]], newCell: Int) -> Bool {
         
         for check in 0..<self.size {
             if newCell == board[check][col] {
