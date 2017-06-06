@@ -10,10 +10,12 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var solveButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     let reuseIdentifier = "cell"
-    var items = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    var puzzle : [[Int]] = [
+    var puzzleNums : [[Int]] = [
         [5,3,0,0,7,0,0,0,0],
         [6,0,0,1,9,5,0,0,0],
         [0,9,8,0,0,0,0,6,0],
@@ -25,30 +27,75 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         [0,0,0,0,8,0,0,7,9]
     ]
     
-    
+    let puzzle = Board()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let testBaord = Board(puzzle)
+        clearButton.addTarget(self, action: #selector(self.clearBoard),
+                              for: UIControlEvents.touchUpInside)
         
+        solveButton.addTarget(self, action: #selector(self.solve),
+                              for: UIControlEvents.touchUpInside)
         
-//        testBaord.solve()
-        testBaord.toString()
-        
+        // FIXME: TEMP
+        puzzle.board = puzzleNums
+//        puzzle.solve()
+        puzzle.toString()
         
     }
 
+    // MARK: - UI IBActions
     
+    func clearBoard() {
+        
+//        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 6, initialSpringVelocity: 4, options: [], animations: {
+//            sender.transform = CGAffineTransform(scaleX: 1.025, y: 1.1)
+//            
+//        }, completion: nil)
+//        
+//        UIView.animate(withDuration: 0.2, delay: 0.3, usingSpringWithDamping: 2, initialSpringVelocity: 10, options: [], animations: {
+//            sender.transform = CGAffineTransform.identity
+//            
+//        }, completion: nil)
+        
+        if (puzzle.clearBoard()) {
+        
+            // TODO: better representation of the success is required
+            self.collectionView.reloadData()
+            print("Board Cleared")
+            
+        }
+        
+        
+        
+    }
     
-    
+    func solve() {
+        
+//        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 6, initialSpringVelocity: 4, options: [], animations: {
+//            sender.transform = CGAffineTransform(scaleX: 1.025, y: 1.1)
+//            
+//        }, completion: nil)
+//        
+//        UIView.animate(withDuration: 0.2, delay: 0.3, usingSpringWithDamping: 2, initialSpringVelocity: 10, options: [], animations: {
+//            sender.transform = CGAffineTransform.identity
+//            
+//        }, completion: nil)
+        
+        
+        if (puzzle.solve()) {
+            
+            // FIXME: better representation of the success is required
+            self.collectionView.reloadData()
+            print("Board solved")
+        }
+    }
     
     // MARK: - UICollectionViewDataSource protocol
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        collectionView.addBackground("Sudoku.png")
         return 9
     }
     
@@ -58,9 +105,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
-        //FIXME
+        // FIXME
         let width = collectionView.bounds.size.width
         let height = collectionView.bounds.size.height
+        collectionView.addBackground("Sudoku.png")
         return CGSize(width: width/13, height: height/9)
     }
     
@@ -69,10 +117,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SudokuCollectionViewCell
         
-        
-        cell.myLabel.text = self.items[indexPath.item]
         cell.myLabel.backgroundColor = UIColor.white
         
+        let number = puzzle.board[indexPath.section][indexPath.row]
+        
+        if number > 0 {
+            
+            cell.myLabel.text = String(number)
+        
+        } else {
+            
+            cell.myLabel.text = ""
+        }
         
         return cell
     }
@@ -83,10 +139,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You selected cell at [\(indexPath.section), \(indexPath.item)]")
         
+        print(((collectionView.cellForItem(at: indexPath) as? SudokuCollectionViewCell)?.myLabel!.text)!)
+        
     }
-
-    
-
 }
 
 

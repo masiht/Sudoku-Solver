@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +20,12 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XNj-wU-uoU">
-                                <rect key="frame" x="20" y="28" width="374" height="374"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="68" width="343" height="343"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="XNj-wU-uoU" secondAttribute="height" multiplier="1:1" id="rfm-we-yVN"/>
                                 </constraints>
@@ -46,7 +50,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="NbG-46-tSG" firstAttribute="centerX" secondItem="8gE-QO-Ynu" secondAttribute="centerX" id="6bQ-ke-WR7"/>
@@ -71,26 +74,30 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrE-OV-EHx">
-                                <rect key="frame" x="99" y="430" width="38" height="30"/>
+                                <rect key="frame" x="95" y="459" width="38" height="30"/>
                                 <state key="normal" title="Solve"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzF-6t-RbQ">
-                                <rect key="frame" x="279" y="430" width="36" height="30"/>
+                                <rect key="frame" x="244" y="459" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XNj-wU-uoU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="58f-Ly-K60"/>
+                            <constraint firstItem="XNj-wU-uoU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="48" id="58f-Ly-K60"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UzF-6t-RbQ" secondAttribute="trailing" constant="79" id="9ih-b8-gAM"/>
                             <constraint firstItem="XNj-wU-uoU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CM4-WS-6ZM"/>
                             <constraint firstItem="JrE-OV-EHx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="79" id="Hyg-ez-Zqr"/>
                             <constraint firstItem="UzF-6t-RbQ" firstAttribute="baseline" secondItem="JrE-OV-EHx" secondAttribute="baseline" id="a7t-h6-gSM"/>
                             <constraint firstItem="XNj-wU-uoU" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="hZ7-Rq-ePk"/>
-                            <constraint firstItem="UzF-6t-RbQ" firstAttribute="top" secondItem="XNj-wU-uoU" secondAttribute="bottom" constant="28" id="jq1-wn-Nmm"/>
+                            <constraint firstItem="UzF-6t-RbQ" firstAttribute="top" secondItem="XNj-wU-uoU" secondAttribute="bottom" constant="48" id="jq1-wn-Nmm"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="clearButton" destination="UzF-6t-RbQ" id="P8h-ul-SBg"/>
+                        <outlet property="collectionView" destination="XNj-wU-uoU" id="oIG-73-HPM"/>
+                        <outlet property="solveButton" destination="JrE-OV-EHx" id="2cH-yN-TRZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

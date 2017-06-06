@@ -13,6 +13,11 @@ class Board {
     var board : [[Int]]!
     var size: Int!
     
+    init() {
+        size = 9
+        board = Array(repeating: Array(repeating: 0, count: size), count: size)
+    }
+    
     init(_ board : [[Int]]) {
         self.board = board
         
@@ -29,9 +34,22 @@ class Board {
         
     }
     
+    /// ## Clear Method
+    /// Public Clear Method: Clears the Board
+    /// - Returns: Bool
+    public func clearBoard() -> Bool {
+        
+        guard board != nil else {
+            return false
+        }
+        
+        board = Array(repeating: Array(repeating: 0, count: size), count: size)
+        return true
+    }
+    
     
     /// Prints a board
-    func toString()  {
+    public func toString()  {
         
         guard board != nil else {
             print("board not available")
@@ -48,7 +66,7 @@ class Board {
     /// ## Solver Method
     /// Public Solve Method: Solves a Board
     /// - Returns: Bool
-    func solve() -> Bool {
+    public func solve() -> Bool {
         if solvable() {
             
             return solve_cell(0, col: 0, board: self.board)
@@ -122,12 +140,9 @@ class Board {
             }
         }
         
-        
         if board[row][col] != 0 {
             return solve_cell(row + 1, col: col, board: board)
         }
-        
-        
         
         for val in 1...self.size {
             if isValidSolution(row, col: col, board: board, newCell: val) {
@@ -157,7 +172,6 @@ class Board {
                 return false
             }
         }
-        
         
         for check in 0..<self.size {
             if newCell == board[row][check] {
